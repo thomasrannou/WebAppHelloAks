@@ -9,10 +9,10 @@ COPY ["WebAppHelloAks.csproj", "WebAppHelloAks/"]
 RUN dotnet restore "WebAppHelloAks/WebAppHelloAks.csproj"
 COPY . .
 WORKDIR "/src/WebAppHelloAks"
-RUN dotnet build "WebAppHelloAks.csproj" -c Release -o /app/build
+RUN dotnet build "WebAppHelloAks.csproj" -c Release -o /app
 
 FROM build AS publish
-RUN dotnet publish "WebAppHelloAks/WebAppHelloAks.csproj" -c Release -o /app/publish
+RUN dotnet publish "WebAppHelloAks/WebAppHelloAks.csproj" -c Release -o /app
 
 FROM base AS final
 WORKDIR /app
