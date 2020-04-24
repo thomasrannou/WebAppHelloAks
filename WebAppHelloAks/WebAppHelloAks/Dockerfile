@@ -5,9 +5,9 @@ EXPOSE 443
 
 FROM mcr.microsoft.com/dotnet/core/sdk:3.0-buster AS build
 WORKDIR /src
-COPY ["WebAppHelloAks.csproj", "WebAppHelloAks/"]
+COPY ["WebAppHelloAks/WebAppHelloAks.csproj", "WebAppHelloAks/"]
 RUN dotnet restore "WebAppHelloAks/WebAppHelloAks.csproj"
-COPY . WebAppHelloAks/
+COPY . .
 WORKDIR "/src/WebAppHelloAks"
 RUN dotnet build "WebAppHelloAks.csproj" -c Release -o /app/build
 
@@ -17,4 +17,4 @@ RUN dotnet publish "WebAppHelloAks.csproj" -c Release -o /app/publish
 FROM base AS final
 WORKDIR /app
 COPY --from=publish /app/publish .
-ENTRYPOINT ["dotnet", "WebAppHelloAks.dll"]
+ENTRYPOINT ["dotnet", "WebAppHelloAks.dll"] 
